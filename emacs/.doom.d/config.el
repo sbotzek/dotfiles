@@ -29,7 +29,8 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/notes/")
+(setq org-directory "~/org/")
+(setq org-agenda-files '("~/org/" "~/org/log/" "~/org/projects/" "~/org/notes/"))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -77,13 +78,14 @@
    browse-url-generic-args     '("/c" "start")
    browse-url-browser-function #'browse-url-generic))
 
+
 ;; org mode - insert finished timestamp when TODO marked DONE
 (setq org-log-done 'time)
 
 ;; org mode - open files in overview mode (everything folded)
 (setq org-startup-folded 'overview)
 
-(setq projectile-project-search-path '("~/dev/"))
+(setq projectile-project-search-path '("~/dev/projects/" "~/dev/forks/" "~/dev/utils/" "~/dev/clones"))
 
 (setq org-babel-clojure-backend 'cider)
 
@@ -91,6 +93,7 @@
 (setq org-tag-alist '((:startgrouptag)
                       ("dev")
                       (:grouptags)
+                      ("webdev")
                       ("java")
                       ("elixir")
                       ("golang")
@@ -101,6 +104,7 @@
                       ("bug")
                       ("nodejs")
                       ("javascript")
+                      ("common_lisp")
                       (:endgrouptag)
 
                       (:startgrouptag)
@@ -112,16 +116,19 @@
                       (:endgrouptag)
 
                       (:startgrouptag)
-                      ("book")
-                      (:grouptags)
                       ("learn")
+                      (:grouptags)
+                      ("book")
+                      ("video")
+                      ("article")
                       (:endgrouptag)
 
                       (:startgrouptag)
                       ("java")
                       (:grouptags)
                       ("spring")
-                      ("JPA")
+                      ("jpa")
+                      ("jooq")
                       ("hibernate")
                       (:endgrouptag)
 
@@ -140,3 +147,22 @@
                       ("ck2")
                       ("eu4")
                       (:endgrouptag)))
+(after! org
+	(setq org-todo-keywords
+	      '((sequence "NEW(n)" ; brand new, needs to be processed into TODO, ICED, or KILLED
+			  "TODO(t)" ; next thing to do
+			  "STARTED(s)" ; i've started work on it
+			  "FOLLOWUP(f)" ; followup means its paused, but not de-prioritized (iced)
+			  "PAUSE(p)" ; paused means it was started, but was de-prioritized (iced)
+			  "ICE(i)" ; to be done at a later date
+			  "|"
+			  "DONE(d)" ; it was done
+			  "ABANDON(a)" ; cancelled, but work was done
+			  "KILL(k)"))) ; cancelled, but no work done
+	(setq org-todo-keyword-faces
+	      '(("NEW" . "red")
+		("TODO" . org-warning)
+		("STARTED" . "yellow")
+		("FOLLOWUP" . "yellow")
+		("PAUSE" . "light blue")
+		("ICE" . "light blue"))))
