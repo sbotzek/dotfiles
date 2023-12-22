@@ -1,0 +1,64 @@
+execute pathogen#infect()
+
+set undodir=~/.vim/undo
+
+set nomodeline
+set number
+set nobackup
+set nocompatible
+syntax on
+filetype plugin indent on
+color evening
+
+set ruler
+
+set autoindent
+set smartindent
+
+set backspace=indent,eol,start
+
+set showcmd
+set showmode
+
+set incsearch
+set hlsearch
+
+set showmatch
+set matchtime=2
+
+set scrolloff=3
+
+set vb
+
+au BufEnter *.go set shiftwidth=4 tabstop=4 softtabstop=4
+au BufEnter *.xml set expandtab shiftwidth=4 tabstop=4 softtabstop=4
+au BufEnter *.yml set expandtab shiftwidth=2 tabstop=2 softtabstop=2
+au BufEnter *.cpp,*.c,*.h,*.hpp,*.inl set expandtab shiftwidth=4 tabstop=4 softtabstop=4
+au BufEnter *.erl,*.hrl set expandtab shiftwidth=4 tabstop=4 softtabstop=4
+au BufEnter *.java set expandtab shiftwidth=4 tabstop=4 softtabstop=4
+au BufEnter *.py set expandtab shiftwidth=4 tabstop=4 softtabstop=4
+au BufEnter *.hs set expandtab shiftwidth=4 tabstop=4 softtabstop=4
+au BufEnter *.js set expandtab shiftwidth=2 tabstop=2 softtabstop=2
+au BufEnter *.html,*.jsp,*.jspf set expandtab shiftwidth=2 tabstop=2 softtabstop=2
+au BufEnter *.scala set expandtab shiftwidth=2 tabstop=2 softtabstop=2
+au BufEnter *.sql set expandtab shiftwidth=2 tabstop=2 softtabstop=2
+au BufEnter *.clj set expandtab shiftwidth=2 tabstop=2 softtabstop=2
+au BufEnter *.cf set ft=cf3 expandtab shiftwidth=4 tabstop=4
+au BufEnter *.rb set expandtab shiftwidth=2 tabstop=2 softtabstop=2
+au BufRead,BufNewFile *.go set filetype=go
+au BufRead,BufNewFile *.jspf set filetype=jsp
+
+:map - <c-w>w
+
+:map <c-l> :tabn<CR>
+:map <c-h> :tabp<CR>
+:map <c-n> :tabnew<CR>
+
+:colorscheme default
+
+
+if filereadable(glob("~/.vimrc_local"))
+        source ~/.bashrc_local
+endif
+
+autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
