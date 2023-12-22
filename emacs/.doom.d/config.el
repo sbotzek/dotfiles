@@ -30,7 +30,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
-(setq org-agenda-files '("~/org/" "~/org/log/" "~/org/projects/" "~/org/notes/"))
+(setq org-agenda-files '("~/org/" "~/org/log/" "~/org/projects/" "~/org/notes/" "~/org/notes/dev/" "~/org/notes/worldbuilding/"))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -77,6 +77,16 @@
    browse-url-generic-program  "/mnt/c/Windows/System32/cmd.exe"
    browse-url-generic-args     '("/c" "start")
    browse-url-browser-function #'browse-url-generic))
+
+
+;; copilot
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
 
 ;; org mode - insert finished timestamp when TODO marked DONE
@@ -166,3 +176,5 @@
 		("FOLLOWUP" . "yellow")
 		("PAUSE" . "light blue")
 		("ICE" . "light blue"))))
+
+(treemacs-project-follow-mode t)
